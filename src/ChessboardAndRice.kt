@@ -3,17 +3,22 @@ import kotlin.test.assertEquals
 
 val SQUARES = 1..64
 
+fun riceGrainsForSquares(): Sequence<BigInteger> = sequence {
+    var squares = Pair(BigInteger.ONE, BigInteger.TWO)
+    while (true) {
+        yield(squares.first)
+        squares = Pair(squares.second, squares.second.multiply(BigInteger.TWO))
+    }
+}
+
 fun getRiceGrainsCountForSquare(square: Int): BigInteger {
     require(square in SQUARES) {
         "Chessboard contains just squares from ${SQUARES.start} to ${SQUARES.endInclusive}"
     }
 
-    var riceGrainsCount = BigInteger.ONE
-    if (square == 1) return riceGrainsCount
-
-    (2..square).forEach { riceGrainsCount = riceGrainsCount.multiply(BigInteger.TWO) }
-
-    return riceGrainsCount
+    return riceGrainsForSquares()
+        .take(square)
+        .last()
 }
 
 fun getTotalRiceGrainsCount(): BigInteger {
