@@ -13,7 +13,7 @@ fun riceGrainsForSquares(): Sequence<BigInteger> = sequence {
 
 fun getRiceGrainsCountForSquare(square: Int): BigInteger {
     require(square in SQUARES) {
-        "Chessboard contains just squares from ${SQUARES.start} to ${SQUARES.endInclusive}"
+        "Chessboard contains just squares from ${SQUARES.first} to ${SQUARES.last}"
     }
 
     return riceGrainsForSquares()
@@ -29,6 +29,7 @@ fun getTotalRiceGrainsCount(): BigInteger {
     return totalRiceGrainsCount
 }
 
+
 fun main() {
     SQUARES.forEach {
         assertEquals(
@@ -37,7 +38,7 @@ fun main() {
     }
 
     assertEquals(
-        expected = BigInteger.TWO.pow(SQUARES.endInclusive) - BigInteger.ONE,
+        expected = BigInteger.TWO.pow(SQUARES.last) - BigInteger.ONE,
         actual = getTotalRiceGrainsCount()
     )
 }
