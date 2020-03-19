@@ -34,11 +34,14 @@ fun main() {
     SQUARES.forEach {
         assertEquals(
             expected = BigInteger.TWO.pow(it - 1),
-            actual = getRiceGrainsCountForSquare(it))
+            actual = getRiceGrainsCountForSquare(it),
+            message = "Rice grains count in $it. square is matching"
+        )
     }
 
     assertEquals(
         expected = BigInteger.TWO.pow(SQUARES.last) - BigInteger.ONE,
-        actual = getTotalRiceGrainsCount()
+        actual = getTotalRiceGrainsCount(),
+        message = "Total rice grains count on chessboard is matching"
     )
 }
